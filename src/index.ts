@@ -8,6 +8,7 @@ async function main() {
     const signer = await initializeKeypair(connection);
   
     console.log("Public key:", signer.publicKey.toBase58());
+    await airdropSolIfNeeded(signer, connection);
 }
 
 
@@ -47,6 +48,7 @@ async function airdropSolIfNeeded(
   
       const latestBlockhash = await connection.getLatestBlockhash();
   
+      console.log("after latestBlockhash");
       await connection.confirmTransaction({
         blockhash: latestBlockhash.blockhash,
         lastValidBlockHeight: latestBlockhash.lastValidBlockHeight,
